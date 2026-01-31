@@ -1,0 +1,248 @@
+
+
+/* Reset y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Pantallas */
+.pantalla {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between; /* Distribución equilibrada */
+    align-items: center;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.pantalla::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.pantalla > * {
+    position: relative;
+    z-index: 1;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+/* Pantalla inicial */
+#pantallaInicial {
+    background: linear-gradient(135deg, #310A31 0%, #847996 100%);
+    animation: gradientShift 5s ease infinite;
+    justify-content: center;
+    gap: 25px;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #310A31 0%, #847996 100%); }
+    50% { background: linear-gradient(135deg, #847996 0%, #88B7B5 100%); }
+}
+
+.titulo-inicial {
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: #F4ECD6;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(49, 10, 49, 0.9);
+    animation: bounce 2s ease-in-out infinite;
+    letter-spacing: 5px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.imagen-regalo {
+    width: 100%;
+    max-width: clamp(200px, 40vh, 400px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(136, 183, 181, 0.9));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.btn-abrir {
+    padding: 15px 50px;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #88B7B5 0%, #A7CAB1 100%);
+    border: 3px solid #F4ECD6;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 25px rgba(136, 183, 181, 0.7);
+    transition: 0.3s;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Pantalla de cumpleaños */
+#pantallaCumpleanos {
+    background: linear-gradient(135deg, #847996 0%, #88B7B5 50%, #F4ECD6 100%);
+    animation: celebrationGradient 6s ease infinite;
+}
+
+@keyframes celebrationGradient {
+    0%, 100% { background: linear-gradient(135deg, #847996 0%, #88B7B5 50%, #F4ECD6 100%); }
+    33% { background: linear-gradient(135deg, #310A31 0%, #847996 50%, #A7CAB1 100%); }
+    66% { background: linear-gradient(135deg, #A7CAB1 0%, #88B7B5 50%, #847996 100%); }
+}
+
+.titulo-cumpleanos {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+
+    color: #310A31;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-family: 'Trebuchet MS', sans-serif;
+
+    text-shadow:
+
+        3px 3px 0 #A7CAB1,
+
+        6px 6px 0 #88B7B5,
+
+        9px 9px 20px rgba(0, 0, 0, 0.4);
+
+    animation: partyText 2s ease-in-out infinite;
+
+    margin-top: 20px;
+
+    background: rgba(244, 236, 214, 0.95);
+
+    padding: 20px 40px;
+
+    border-radius: 30px;
+
+    border: 5px solid #847996;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+}
+
+/* Carrusel cíclico infinito (MEJORADO) */
+.carrusel-container {
+    flex: 1; /* Toma el espacio central sin empujar al resto */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.carrusel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carrusel-pista {
+    display: flex;
+    gap: 20px;
+    animation: desplazamientoInfinito 25s linear infinite;
+    width: max-content;
+}
+
+.carrusel-pista:hover {
+    animation-play-state: paused;
+}
+
+@keyframes desplazamientoInfinito {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.carrusel-item {
+    height: 45vh; /* Se ajusta según el alto de la pantalla */
+    min-height: 250px;
+    max-height: 500px;
+    aspect-ratio: 4/5;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #1e1e1e; /* Fondo oscuro para rellenar espacios de fotos horizontales */
+    border: 5px solid #847996;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(49, 10, 49, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrusel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ¡Clave! Muestra la imagen completa sin cortes */
+    display: block;
+}
+
+/* Regalo abierto */
+.regalo-abierto-container {
+    height: 15vh;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.imagen-regalo-abierto {
+    height: 100%;
+    width: auto;
+    filter: drop-shadow(0 5px 20px rgba(167, 202, 177, 0.8));
+    animation: aparecer 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes aparecer {
+    0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .carrusel-item { height: 38vh; border-width: 3px; }
+    .titulo-cumpleanos { font-size: 1.6rem; padding: 10px 15px; }
+    .btn-abrir { padding: 12px 35px; }
+}
+
+@media (max-height: 600px) {
+    .titulo-cumpleanos { font-size: 1.2rem; }
+    .regalo-abierto-container { height: 12vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carrusel-pista, .imagen-regalo, .titulo-inicial { animation: none; }
+}
